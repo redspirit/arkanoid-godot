@@ -281,13 +281,12 @@ extents = Vector2( 8.6813, 344.873 )
 11/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 290, 10 )
+extents = Vector2( 290, 22.6533 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="GUI" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="back" type="ColorRect" parent="GUI"]
 margin_right = 559.0
@@ -298,11 +297,18 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="GUI"]
-margin_left = 217.0
-margin_top = 20.0
-margin_right = 345.0
-margin_bottom = 36.0
-text = "ARKANOID"
+margin_left = 26.0
+margin_top = 21.0
+margin_right = 138.0
+margin_bottom = 37.0
+text = "Жизней:"
+
+[node name="LivesLabel" type="Label" parent="GUI"]
+margin_left = 142.0
+margin_top = 21.0
+margin_right = 182.0
+margin_bottom = 37.0
+text = "3"
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2( 0, 54 )
@@ -364,15 +370,13 @@ format = 1
 tile_data = PoolIntArray( 196608, 11, 0, 196610, 11, 0, 196612, 11, 0, 196614, 11, 0, 196616, 11, 0, 196618, 11, 0, 196620, 11, 0, 196622, 11, 0, 196624, 11, 0, 196626, 11, 0, 262145, 6, 0, 262147, 6, 0, 262149, 6, 0, 262151, 6, 0, 262153, 6, 0, 262155, 6, 0, 262157, 6, 0, 262159, 6, 0, 262161, 6, 0, 262163, 6, 0, 327680, 2, 0, 327682, 2, 0, 327684, 2, 0, 327686, 2, 0, 327688, 2, 0, 327690, 2, 0, 327692, 2, 0, 327694, 2, 0, 327696, 2, 0, 327698, 2, 0, 393217, 2, 0, 393219, 2, 0, 393221, 2, 0, 393223, 2, 0, 393225, 2, 0, 393227, 2, 0, 393229, 2, 0, 393231, 2, 0, 393233, 2, 0, 393235, 2, 0, 589829, 3, 0, 589831, 3, 0, 589833, 3, 0, 589835, 3, 0, 589837, 3, 0, 589839, 3, 0, 655367, 3, 0, 655369, 3, 0, 655371, 3, 0, 655373, 3, 0, 720905, 3, 0, 720907, 3, 0, 786442, 3, 0 )
 
 [node name="Ball" parent="Body/PlayField" instance=ExtResource( 4 )]
-position = Vector2( 252, 593.621 )
 
 [node name="OutFieldArea" type="Area2D" parent="Body/PlayField"]
-editor/display_folded = true
 gravity = 0.0
 monitorable = false
 collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="Body/PlayField/OutFieldArea"]
-position = Vector2( 266, 698 )
+position = Vector2( 265, 697 )
 shape = SubResource( 7 )
 [connection signal="body_entered" from="Body/PlayField/OutFieldArea" to="." method="_on_OutFieldArea_body_entered"]

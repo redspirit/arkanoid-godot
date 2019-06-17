@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var direction = 0
-var speed = 300
+var speed = 400
 var playerSize = Vector2()
 var leftBorder = 0
 var rightBorder = 0
