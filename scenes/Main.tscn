@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://sprites/blocks.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=4]
+[ext_resource path="res://music/Game_Over.ogg" type="AudioStream" id=5]
+[ext_resource path="res://music/Game_Start.ogg" type="AudioStream" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "blocks.png 0"
@@ -292,6 +294,7 @@ margin_bottom = 723.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="GUI" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 601, 0 )
 __meta__ = {
 "_edit_lock_": true
@@ -379,17 +382,16 @@ position = Vector2( 536.671, 330.571 )
 shape = SubResource( 5 )
 
 [node name="Player" parent="Body/PlayField" instance=ExtResource( 3 )]
-position = Vector2( 316.657, 591.487 )
+position = Vector2( 270, 592 )
 
 [node name="blocks" type="Node2D" parent="Body/PlayField"]
-editor/display_folded = true
 
 [node name="EditorBlocks" type="TileMap" parent="Body/PlayField/blocks"]
 scale = Vector2( 3, 3 )
 tile_set = SubResource( 6 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 131078, 9, 0, 131087, 9, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 262156, 8, 0, 262158, 8, 0, 262160, 8, 0, 262162, 8, 0, 262164, 8, 0, 327680, 4, 0, 327682, 4, 0, 327684, 4, 0, 327686, 4, 0, 327688, 4, 0, 327690, 4, 0, 327692, 4, 0, 327694, 4, 0, 327696, 4, 0, 327698, 4, 0, 327700, 4, 0, 393216, 5, 0, 393218, 5, 0, 393220, 5, 0, 393222, 5, 0, 393224, 5, 0, 393226, 5, 0, 393228, 5, 0, 393230, 5, 0, 393232, 5, 0, 393234, 5, 0, 393236, 5, 0, 458752, 7, 0, 458754, 7, 0, 458756, 7, 0, 458758, 7, 0, 458760, 7, 0, 458762, 7, 0, 458764, 7, 0, 458766, 7, 0, 458768, 7, 0, 458770, 7, 0, 458772, 7, 0, 524288, 6, 0, 524290, 6, 0, 524292, 6, 0, 524294, 6, 0, 524296, 6, 0, 524298, 6, 0, 524300, 6, 0, 524302, 6, 0, 524304, 6, 0, 524306, 6, 0, 524308, 6, 0 )
+tile_data = PoolIntArray( 131078, 9, 0, 131087, 9, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 262156, 8, 0, 262158, 8, 0, 262160, 8, 0, 262162, 8, 0, 262164, 8, 0, 327680, 4, 0, 327682, 4, 0, 327684, 4, 0, 327686, 4, 0, 327688, 4, 0, 327690, 4, 0, 327692, 4, 0, 327694, 4, 0, 327696, 4, 0, 327698, 4, 0, 327700, 4, 0, 393216, 5, 0, 393218, 5, 0, 393220, 5, 0, 393222, 5, 0, 393224, 5, 0, 393226, 5, 0, 393228, 5, 0, 393230, 5, 0, 393232, 5, 0, 393234, 5, 0, 393236, 5, 0, 458752, 7, 0, 458754, 7, 0, 458756, 7, 0, 458758, 7, 0, 458760, 7, 0, 458762, 7, 0, 458764, 7, 0, 458766, 7, 0, 458768, 7, 0, 458770, 7, 0, 458772, 7, 0, 524288, 6, 0, 524290, 6, 0, 524292, 6, 0, 524294, 6, 0, 524296, 6, 0, 524298, 6, 0, 524300, 6, 0, 524302, 6, 0, 524304, 6, 0, 524306, 6, 0, 524308, 6, 0, 786439, 8, 0, 786442, 8, 0, 786445, 8, 0 )
 
 [node name="Ball" parent="Body/PlayField" instance=ExtResource( 4 )]
 
@@ -402,5 +404,32 @@ collision_layer = 0
 [node name="collision" type="CollisionShape2D" parent="Body/PlayField/OutFieldArea"]
 position = Vector2( 265, 694 )
 shape = SubResource( 7 )
+
+[node name="GameoverLabel" type="Label" parent="Body"]
+visible = false
+margin_left = 190.0
+margin_top = 538.0
+margin_right = 406.0
+margin_bottom = 562.0
+text = "game over"
+uppercase = true
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StickTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Gameover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )
+
+[node name="Gamestart" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
 [connection signal="getBonus" from="Body/PlayField/Player" to="." method="_on_Player_getBonus"]
+[connection signal="CollideBall" from="Body/PlayField/Ball" to="." method="_on_Ball_CollideBall"]
 [connection signal="body_entered" from="Body/PlayField/OutFieldArea" to="." method="_on_OutFieldArea_body_entered"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
+[connection signal="timeout" from="StickTimer" to="." method="_on_StickTimer_timeout"]

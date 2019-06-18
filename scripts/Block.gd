@@ -19,7 +19,7 @@ var blocks = {		#[lives, score]
 	9: [5, 1000, "gold"]		#0,88
 }
 
-var bonuses = ["expand", "divide", "laser", "slow", "break", "catch", "player"]
+var bonuses = ["expand", "laser", "slow", "catch", "player"]
 
 var lives
 var score
@@ -65,7 +65,7 @@ func setup(x, y, rect, index):
 	
 func emitRandomBonus():
 	if rand_range(0, 1) < 0.5 :
-		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 7))], position)
+		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 5))], position)
 	
 func kick():
 	lives -= 1

@@ -2,15 +2,17 @@ extends Node2D
 
 var isPreparedBall = true
 var Bonus = preload("res://scenes/Bonus.tscn")
+var Block = preload("res://scenes/Block.tscn")
 
 var lives = 3
 var score = 0
+var isStick = false
 
-
+var ball
 
 func _ready():
 	
-	var Block = preload("res://scenes/Block.tscn")
+	ball = $Body/PlayField/Ball
 	
 	var EditorMap = $Body/PlayField/blocks/EditorBlocks
 	EditorMap.visible = false
@@ -26,16 +28,17 @@ func _ready():
 	isPreparedBall = true
 	$GUI/scoreCurrent.text = str(score)
 	setLifeBar(lives)
+	$Sounds/Gamestart.play()
 
 
 func _physics_process(delta):
 	
 	if isPreparedBall:
 		var pos = $Body/PlayField/Player.position
-		$Body/PlayField/Ball.grab(Vector2(pos.x, pos.y - 24))
+		ball.grab(Vector2(pos.x, pos.y - 24))
 	
 	if Input.is_action_just_pressed("ui_accept") && isPreparedBall:
-		$Body/PlayField/Ball.release(300)
+		ball.release()
 		isPreparedBall = false
 	
 	
@@ -55,10 +58,17 @@ func setLifeBar(num) :
 func _on_OutFieldArea_body_entered(body):
 	lives -= 1
 	setLifeBar(lives)
+	
+	$LifeTimer.start(3)
+	$Body/PlayField/Player.explode()
+	ball.visible = false
+	
 	if lives > 0:
 		isPreparedBall = true
 	else :
-		print("GAME OVER")
+		# GAME OVER
+		$Body/GameoverLabel.visible = true
+		$Sounds/Gameover.play()
 	
 func _on_addScore(value):
 	score += value
@@ -68,7 +78,29 @@ func _on_spawnBonus(name, pos):
 	var bonus = Bonus.instance()
 	bonus.spawn(name, pos)
 	$Body/PlayField.add_child(bonus)
-	
-	
+
 func _on_Player_getBonus(name):
-	print("NAME ", name)
+	if name == "player" && lives < 6:
+		lives += 1
+		setLifeBar(lives)
+	elif name == "slow":
+		ball.doSlow() 
+	elif name == "catch":
+		isStick = true
+		$StickTimer.start()
+
+
+func _on_LifeTimer_timeout():
+	if lives == 0 :
+		return
+	$Body/PlayField/Player.reset()
+	$Sounds/Gamestart.play()
+	ball.visible = true
+
+# шар удаляется об палку
+func _on_Ball_CollideBall():
+	if isStick:
+		isPreparedBall = true
+
+func _on_StickTimer_timeout():
+	isStick = false

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hit_border.wav-9beb68323991ba084f9c801b832b1613.sample"
+
+[deps]
+
+source_file="res://sounds/hit_border.wav"
+dest_files=[ "res://.import/hit_border.wav-9beb68323991ba084f9c801b832b1613.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
