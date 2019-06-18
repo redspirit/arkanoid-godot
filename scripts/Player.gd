@@ -10,9 +10,16 @@ var rightBorder = 0
 var playerX = 0
 var explodeFrame = 0
 var isFreeze = false
+var isExpand = false
+var isLaser = false
+var bulletsLeft = 3
 
 var normalWidth = Rect2(0,0,32,8)
 var extendWidth = Rect2(0,8,48,8)
+var normalLaser = Rect2(0,16,32,8)
+var extendLaser = Rect2(0,24,48,8)
+
+var bulletMotion = Vector2()
 
 var explodeRects = [
 	Rect2(0,40,32,8),
@@ -36,22 +43,42 @@ func _physics_process(delta):
 	else :
 		direction = 0
 	
-	move_and_slide(Vector2(direction * speed, 0))
+	if Input.is_action_just_pressed("ui_accept") && isLaser && bulletsLeft > 0:
+		bulletMotion = Vector2(0, -1)
 	
 
-
-
-func expand() :
-	$Sprite.region_rect = extendWidth
-	$collision.shape.extents = Vector2(72,12)
+	$bullets/bulletsBody.move_and_slide(bulletMotion * 500)
+	move_and_slide(Vector2(direction * speed, 0))
 	
 func reset():
 	$Sprite.region_rect = normalWidth
 	$collision.shape.extents = Vector2(48,12)
 	$collision.disabled = false
+	$bullets.visible = false
 	isFreeze = false
 	visible = true
+	isExpand = false
+	isLaser = false
+
+
+func expand() :
+	isExpand = true
+	$collision.shape.extents = Vector2(72,12)
+	if isLaser:
+		$Sprite.region_rect = extendLaser
+	else :
+		$Sprite.region_rect = extendWidth
 	
+	
+func setLaser():
+	isLaser = true
+	#$bullets.visible = true
+	bulletsLeft = 3
+	if isExpand:
+		$Sprite.region_rect = extendLaser
+	else :
+		$Sprite.region_rect = normalLaser
+
 	
 # уничтожаем палку
 func explode():
@@ -59,8 +86,10 @@ func explode():
 	$ExplodeTimer.start()
 	isFreeze = true
 	
-func setLaser():
-	print("LASER!")
+func stopBullet() :
+	$bullets.position.y = -22
+	bulletMotion = Vector2()
+	$bullets.visible = false
 	
 # ловим бонус
 func _on_Area2D_area_entered(area):

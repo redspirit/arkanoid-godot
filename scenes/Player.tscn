@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player.png" type="Texture" id=2]
@@ -12,17 +12,26 @@ extents = Vector2( 48, 12 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 48, 12 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 9 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5, 9 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="bugor" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 3 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 editor/display_folded = true
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -33,9 +42,41 @@ shape = SubResource( 2 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 8 )
+region_rect = Rect2( 0, 16, 32, 8 )
 
 [node name="ExplodeTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="bullets" type="Node2D" parent="."]
+position = Vector2( 0, -22 )
+
+[node name="Left" type="Sprite" parent="bullets"]
+position = Vector2( -29.187, 0 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+vframes = 8
+hframes = 19
+frame = 45
+
+[node name="Right" type="Sprite" parent="bullets"]
+position = Vector2( 29.628, 0 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+vframes = 8
+hframes = 19
+frame = 43
+
+[node name="bulletsBody" type="KinematicBody2D" parent="bullets"]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullets/bulletsBody"]
+position = Vector2( -31.3279, 0.27055 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="bullets/bulletsBody"]
+position = Vector2( 32.3279, -0.135281 )
+shape = SubResource( 5 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_ExplodeTimer_timeout"]

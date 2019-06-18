@@ -12,7 +12,7 @@ friction = 0.0
 bounce = 1.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 8.0
+radius = 9.45667
 
 [node name="Ball" type="RigidBody2D" groups=[
 "balls",
@@ -29,7 +29,7 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 5, 6 )
+position = Vector2( 5, 5 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true

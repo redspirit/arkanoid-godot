@@ -20,6 +20,7 @@ var blocks = {		#[lives, score]
 }
 
 var bonuses = ["expand", "laser", "slow", "catch", "player"]
+#var bonuses = ["laser", "laser", "laser", "laser", "laser"]
 
 var lives
 var score
@@ -64,7 +65,7 @@ func setup(x, y, rect, index):
 	animName = blocks[blockIndex][2]
 	
 func emitRandomBonus():
-	if rand_range(0, 1) < 0.5 :
+	if rand_range(0, 1) < 0.05 :
 		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 5))], position)
 	
 func kick():
