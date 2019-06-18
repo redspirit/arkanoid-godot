@@ -10,11 +10,6 @@ extents = Vector2( 24, 12 )
 collision_layer = 0
 script = ExtResource( 1 )
 
-[node name="blocks" type="Sprite" parent="."]
-visible = false
-position = Vector2( -103, 50 )
-texture = ExtResource( 2 )
-
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )

@@ -1,9 +1,12 @@
 extends Node2D
 
 var isPreparedBall = true
+var Bonus = preload("res://scenes/Bonus.tscn")
 
 var lives = 3
 var score = 0
+
+
 
 func _ready():
 	
@@ -17,6 +20,7 @@ func _ready():
 		var id = EditorMap.get_cell(point.x, point.y)
 		block.setup(point.x, point.y, EditorMap.tile_set.tile_get_region(id), id)
 		block.connect("addScore", self, "_on_addScore")
+		block.connect("spawnBonus", self, "_on_spawnBonus")
 		$Body/PlayField/blocks.add_child(block)
 
 	isPreparedBall = true
@@ -59,3 +63,12 @@ func _on_OutFieldArea_body_entered(body):
 func _on_addScore(value):
 	score += value
 	$GUI/scoreCurrent.text = str(score)
+	
+func _on_spawnBonus(name, pos):
+	var bonus = Bonus.instance()
+	bonus.spawn(name, pos)
+	$Body/PlayField.add_child(bonus)
+	
+	
+func _on_Player_getBonus(name):
+	print("NAME ", name)

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal getBonus(name)
+
 var direction = 0
 var speed = 400
 var playerSize = Vector2()
@@ -10,7 +12,7 @@ var playerX = 0
 func _ready():
 	playerSize = $Sprite.region_rect.size
 	leftBorder = 32 + (playerSize.x / 2)
-	rightBorder = 442 + (playerSize.x / 2)
+	rightBorder = 442 + 24 + (playerSize.x / 2)
 
 
 func _physics_process(delta):
@@ -29,3 +31,9 @@ func _physics_process(delta):
 	else :
 		playerX = position.x
 	
+
+# ловим бонус
+func _on_Area2D_area_entered(area):
+	var bonus = area.get_parent();
+	emit_signal("getBonus", bonus.bonusName)
+	bonus.queue_free()

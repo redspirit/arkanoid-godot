@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal addScore(value)
+signal spawnBonus(name, pos)
 
 var isBlock = true
 var blockIndex = 0
@@ -18,6 +19,8 @@ var blocks = {		#[lives, score]
 	9: [5, 1000, "gold"]		#0,88
 }
 
+var bonuses = ["expand", "divide", "laser", "slow", "break", "catch", "player"]
+
 var lives
 var score
 var animName = ""
@@ -28,7 +31,7 @@ var animElapsed = 0
 var animFrame = 0
 
 func _ready():
-	pass
+	randomize()
 
 	
 func _process(delta):
@@ -60,12 +63,15 @@ func setup(x, y, rect, index):
 	score = blocks[blockIndex][1]
 	animName = blocks[blockIndex][2]
 	
+func emitRandomBonus():
+	if rand_range(0, 1) < 0.5 :
+		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 7))], position)
+	
 func kick():
-	
 	lives -= 1
-	
 	if lives == 0 :
 		emit_signal("addScore", score)
+		emitRandomBonus()
 		queue_free()
 	else :
 		useAnimation = true
