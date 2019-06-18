@@ -18,7 +18,7 @@ func _ready():
 		$Body/PlayField/blocks.add_child(block)
 
 	isPreparedBall = true
-	$GUI/LivesLabel.text = str(lives)
+	setLifeBar(lives)
 
 
 func _physics_process(delta):
@@ -32,11 +32,22 @@ func _physics_process(delta):
 		isPreparedBall = false
 	
 	
+func setLifeBar(num) :
+	for child in $GUI/LifeBar.get_children():
+		child.queue_free()
+	var texture = preload("res://sprites/life.png")
+	for i in range(num):
+		var sprite = Sprite.new()
+		sprite.texture = texture
+		sprite.position.x = (i % 3) * 16
+		sprite.position.y = floor(i / 3) * 8
+		$GUI/LifeBar.add_child(sprite)
+
 
 # шар улетает вниз
 func _on_OutFieldArea_body_entered(body):
 	lives -= 1
-	$GUI/LivesLabel.text = str(lives)
+	setLifeBar(lives)
 	if lives > 0:
 		isPreparedBall = true
 	else :
