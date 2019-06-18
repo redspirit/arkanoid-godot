@@ -3,9 +3,10 @@
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://sprites/blocks.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=4]
-[ext_resource path="res://music/Game_Over.ogg" type="AudioStream" id=5]
-[ext_resource path="res://music/Game_Start.ogg" type="AudioStream" id=6]
+[ext_resource path="res://sprites/tiles.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://music/Game_Over.ogg" type="AudioStream" id=6]
+[ext_resource path="res://music/Game_Start.ogg" type="AudioStream" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "blocks.png 0"
@@ -180,108 +181,6 @@ extents = Vector2( 10, 351.195 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8.6813, 344.873 )
 
-[sub_resource type="TileSet" id=6]
-2/name = "blocks.png 2"
-2/texture = ExtResource( 2 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 32, 64, 16, 8 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/shapes = [  ]
-2/z_index = 0
-3/name = "blocks.png 3"
-3/texture = ExtResource( 2 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 48, 64, 16, 8 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shapes = [  ]
-3/z_index = 0
-4/name = "blocks.png 4"
-4/texture = ExtResource( 2 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 72, 16, 8 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shapes = [  ]
-4/z_index = 0
-5/name = "blocks.png 5"
-5/texture = ExtResource( 2 )
-5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 16, 72, 16, 8 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shapes = [  ]
-5/z_index = 0
-6/name = "blocks.png 6"
-6/texture = ExtResource( 2 )
-6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 32, 72, 16, 8 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 0, 0 )
-6/navigation_offset = Vector2( 0, 0 )
-6/shapes = [  ]
-6/z_index = 0
-7/name = "blocks.png 7"
-7/texture = ExtResource( 2 )
-7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 48, 72, 16, 8 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 0, 0 )
-7/navigation_offset = Vector2( 0, 0 )
-7/shapes = [  ]
-7/z_index = 0
-8/name = "blocks.png 8"
-8/texture = ExtResource( 2 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 0, 80, 16, 8 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shapes = [  ]
-8/z_index = 0
-9/name = "blocks.png 9"
-9/texture = ExtResource( 2 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 0, 88, 16, 8 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shapes = [  ]
-9/z_index = 0
-10/name = "blocks.png 10"
-10/texture = ExtResource( 2 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 0, 64, 16, 8 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shapes = [  ]
-10/z_index = 0
-11/name = "blocks.png 11"
-11/texture = ExtResource( 2 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 16, 64, 16, 8 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shapes = [  ]
-11/z_index = 0
-
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 290, 22.6533 )
 
@@ -386,14 +285,63 @@ position = Vector2( 270, 592 )
 
 [node name="blocks" type="Node2D" parent="Body/PlayField"]
 
-[node name="EditorBlocks" type="TileMap" parent="Body/PlayField/blocks"]
+[node name="map_1" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
 scale = Vector2( 3, 3 )
-tile_set = SubResource( 6 )
-cell_size = Vector2( 8, 8 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
 format = 1
-tile_data = PoolIntArray( 131078, 9, 0, 131087, 9, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 262156, 8, 0, 262158, 8, 0, 262160, 8, 0, 262162, 8, 0, 262164, 8, 0, 327680, 4, 0, 327682, 4, 0, 327684, 4, 0, 327686, 4, 0, 327688, 4, 0, 327690, 4, 0, 327692, 4, 0, 327694, 4, 0, 327696, 4, 0, 327698, 4, 0, 327700, 4, 0, 393216, 5, 0, 393218, 5, 0, 393220, 5, 0, 393222, 5, 0, 393224, 5, 0, 393226, 5, 0, 393228, 5, 0, 393230, 5, 0, 393232, 5, 0, 393234, 5, 0, 393236, 5, 0, 458752, 7, 0, 458754, 7, 0, 458756, 7, 0, 458758, 7, 0, 458760, 7, 0, 458762, 7, 0, 458764, 7, 0, 458766, 7, 0, 458768, 7, 0, 458770, 7, 0, 458772, 7, 0, 524288, 6, 0, 524290, 6, 0, 524292, 6, 0, 524294, 6, 0, 524296, 6, 0, 524298, 6, 0, 524300, 6, 0, 524302, 6, 0, 524304, 6, 0, 524306, 6, 0, 524308, 6, 0, 786439, 8, 0, 786442, 8, 0, 786445, 8, 0 )
+tile_data = PoolIntArray( 262144, 8, 0, 262145, 8, 0, 262146, 8, 0, 262147, 8, 0, 262148, 8, 0, 262149, 8, 0, 262150, 8, 0, 262151, 8, 0, 262152, 8, 0, 262153, 8, 0, 262154, 8, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 393216, 7, 0, 393217, 7, 0, 393218, 7, 0, 393219, 7, 0, 393220, 7, 0, 393221, 7, 0, 393222, 7, 0, 393223, 7, 0, 393224, 7, 0, 393225, 7, 0, 393226, 7, 0, 458752, 5, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 524288, 6, 0, 524289, 6, 0, 524290, 6, 0, 524291, 6, 0, 524292, 6, 0, 524293, 6, 0, 524294, 6, 0, 524295, 6, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 589824, 3, 0, 589825, 3, 0, 589826, 3, 0, 589827, 3, 0, 589828, 3, 0, 589829, 3, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0 )
 
-[node name="Ball" parent="Body/PlayField" instance=ExtResource( 4 )]
+[node name="map_2" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 131072, 10, 0, 196608, 10, 0, 196609, 7, 0, 262144, 10, 0, 262145, 7, 0, 262146, 2, 0, 327680, 10, 0, 327681, 7, 0, 327682, 2, 0, 327683, 3, 0, 393216, 10, 0, 393217, 7, 0, 393218, 2, 0, 393219, 3, 0, 393220, 4, 0, 458752, 10, 0, 458753, 7, 0, 458754, 2, 0, 458755, 3, 0, 458756, 4, 0, 458757, 5, 0, 524288, 10, 0, 524289, 7, 0, 524290, 2, 0, 524291, 3, 0, 524292, 4, 0, 524293, 5, 0, 524294, 6, 0, 589824, 10, 0, 589825, 7, 0, 589826, 2, 0, 589827, 3, 0, 589828, 4, 0, 589829, 5, 0, 589830, 6, 0, 589831, 7, 0, 655360, 10, 0, 655361, 7, 0, 655362, 2, 0, 655363, 3, 0, 655364, 4, 0, 655365, 5, 0, 655366, 6, 0, 655367, 7, 0, 655368, 10, 0, 720896, 10, 0, 720897, 7, 0, 720898, 2, 0, 720899, 3, 0, 720900, 4, 0, 720901, 5, 0, 720902, 6, 0, 720903, 7, 0, 720904, 10, 0, 720905, 7, 0, 786432, 8, 0, 786433, 8, 0, 786434, 8, 0, 786435, 8, 0, 786436, 8, 0, 786437, 8, 0, 786438, 8, 0, 786439, 8, 0, 786440, 8, 0, 786441, 8, 0, 786442, 2, 0 )
+
+[node name="map_3" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 196608, 3, 0, 196609, 3, 0, 196610, 3, 0, 196611, 3, 0, 196612, 3, 0, 196613, 3, 0, 196614, 3, 0, 196615, 3, 0, 196616, 3, 0, 196617, 3, 0, 196618, 3, 0, 327680, 10, 0, 327681, 10, 0, 327682, 10, 0, 327683, 9, 0, 327684, 9, 0, 327685, 9, 0, 327686, 9, 0, 327687, 9, 0, 327688, 9, 0, 327689, 9, 0, 327690, 9, 0, 458752, 4, 0, 458753, 4, 0, 458754, 4, 0, 458755, 4, 0, 458756, 4, 0, 458757, 4, 0, 458758, 4, 0, 458759, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, 4, 0, 589824, 9, 0, 589825, 9, 0, 589826, 9, 0, 589827, 9, 0, 589828, 9, 0, 589829, 9, 0, 589830, 9, 0, 589831, 9, 0, 589832, 10, 0, 589833, 10, 0, 589834, 10, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 851968, 5, 0, 851969, 5, 0, 851970, 5, 0, 851971, 9, 0, 851972, 9, 0, 851973, 9, 0, 851974, 9, 0, 851975, 9, 0, 851976, 9, 0, 851977, 9, 0, 851978, 9, 0, 983040, 2, 0, 983041, 2, 0, 983042, 2, 0, 983043, 2, 0, 983044, 2, 0, 983045, 2, 0, 983046, 2, 0, 983047, 2, 0, 983048, 2, 0, 983049, 2, 0, 983050, 2, 0 )
+
+[node name="map_4" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 196609, 7, 0, 196610, 6, 0, 196611, 5, 0, 196612, 8, 0, 196614, 11, 0, 196615, 10, 0, 196616, 7, 0, 196617, 8, 0, 262145, 6, 0, 262146, 5, 0, 262147, 8, 0, 262148, 3, 0, 262150, 10, 0, 262151, 7, 0, 262152, 8, 0, 262153, 5, 0, 327681, 5, 0, 327682, 8, 0, 327683, 3, 0, 327684, 2, 0, 327686, 7, 0, 327687, 8, 0, 327688, 5, 0, 327689, 4, 0, 393217, 8, 0, 393218, 3, 0, 393219, 2, 0, 393220, 11, 0, 393222, 8, 0, 393223, 5, 0, 393224, 4, 0, 393225, 3, 0, 458753, 3, 0, 458754, 2, 0, 458755, 11, 0, 458756, 10, 0, 458758, 5, 0, 458759, 4, 0, 458760, 3, 0, 458761, 8, 0, 524289, 2, 0, 524290, 11, 0, 524291, 10, 0, 524292, 8, 0, 524294, 4, 0, 524295, 3, 0, 524296, 8, 0, 524297, 11, 0, 589825, 11, 0, 589826, 10, 0, 589827, 8, 0, 589828, 6, 0, 589830, 3, 0, 589831, 8, 0, 589832, 11, 0, 589833, 10, 0, 655361, 10, 0, 655362, 8, 0, 655363, 6, 0, 655364, 5, 0, 655366, 8, 0, 655367, 11, 0, 655368, 10, 0, 655369, 7, 0, 720897, 8, 0, 720898, 6, 0, 720899, 5, 0, 720900, 4, 0, 720902, 11, 0, 720903, 10, 0, 720904, 7, 0, 720905, 8, 0, 786433, 6, 0, 786434, 5, 0, 786435, 4, 0, 786436, 3, 0, 786438, 10, 0, 786439, 7, 0, 786440, 8, 0, 786441, 5, 0, 851969, 5, 0, 851970, 4, 0, 851971, 3, 0, 851972, 2, 0, 851974, 7, 0, 851975, 8, 0, 851976, 5, 0, 851977, 4, 0, 917505, 4, 0, 917506, 3, 0, 917507, 2, 0, 917508, 8, 0, 917510, 8, 0, 917511, 5, 0, 917512, 4, 0, 917513, 3, 0 )
+
+[node name="map_5" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 3, 7, 0, 7, 7, 0, 65539, 7, 0, 65543, 7, 0, 131076, 7, 0, 131078, 7, 0, 196612, 7, 0, 196614, 7, 0, 262147, 8, 0, 262148, 8, 0, 262149, 8, 0, 262150, 8, 0, 262151, 8, 0, 327682, 8, 0, 327683, 8, 0, 327684, 8, 0, 327685, 8, 0, 327686, 8, 0, 327687, 8, 0, 327688, 8, 0, 393218, 8, 0, 393219, 4, 0, 393220, 8, 0, 393221, 8, 0, 393222, 8, 0, 393223, 4, 0, 393224, 8, 0, 458754, 8, 0, 458755, 4, 0, 458756, 8, 0, 458757, 8, 0, 458758, 8, 0, 458759, 4, 0, 458760, 8, 0, 524289, 8, 0, 524290, 8, 0, 524291, 8, 0, 524292, 8, 0, 524293, 8, 0, 524294, 8, 0, 524295, 8, 0, 524296, 8, 0, 524297, 8, 0, 589825, 8, 0, 589826, 8, 0, 589827, 8, 0, 589828, 8, 0, 589829, 8, 0, 589830, 8, 0, 589831, 8, 0, 589832, 8, 0, 589833, 8, 0, 655361, 8, 0, 655362, 8, 0, 655363, 8, 0, 655364, 8, 0, 655365, 8, 0, 655366, 8, 0, 655367, 8, 0, 655368, 8, 0, 655369, 8, 0, 720897, 8, 0, 720899, 8, 0, 720900, 8, 0, 720901, 8, 0, 720902, 8, 0, 720903, 8, 0, 720905, 8, 0, 786433, 8, 0, 786435, 8, 0, 786439, 8, 0, 786441, 8, 0, 851969, 8, 0, 851971, 8, 0, 851975, 8, 0, 851977, 8, 0, 917508, 8, 0, 917510, 8, 0, 983044, 8, 0, 983046, 8, 0 )
+
+[node name="map_6" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 262144, 5, 0, 262146, 4, 0, 262148, 3, 0, 262150, 3, 0, 262152, 4, 0, 262154, 5, 0, 327680, 5, 0, 327682, 4, 0, 327684, 3, 0, 327686, 3, 0, 327688, 4, 0, 327690, 5, 0, 393216, 5, 0, 393218, 4, 0, 393220, 3, 0, 393222, 3, 0, 393224, 4, 0, 393226, 5, 0, 458752, 5, 0, 458754, 4, 0, 458756, 3, 0, 458758, 3, 0, 458760, 4, 0, 458762, 5, 0, 524288, 5, 0, 524290, 9, 0, 524291, 7, 0, 524292, 9, 0, 524293, 7, 0, 524294, 9, 0, 524295, 7, 0, 524296, 9, 0, 524298, 5, 0, 589824, 5, 0, 589826, 4, 0, 589828, 3, 0, 589830, 3, 0, 589832, 4, 0, 589834, 5, 0, 655360, 5, 0, 655362, 4, 0, 655364, 3, 0, 655366, 3, 0, 655368, 4, 0, 655370, 5, 0, 720896, 5, 0, 720898, 4, 0, 720900, 3, 0, 720902, 3, 0, 720904, 4, 0, 720906, 5, 0, 786432, 5, 0, 786434, 4, 0, 786436, 3, 0, 786438, 3, 0, 786440, 4, 0, 786442, 5, 0, 851968, 7, 0, 851970, 7, 0, 851972, 9, 0, 851974, 9, 0, 851976, 7, 0, 851978, 7, 0, 917504, 5, 0, 917506, 4, 0, 917508, 3, 0, 917510, 3, 0, 917512, 4, 0, 917514, 5, 0 )
+
+[node name="map_7" type="TileMap" parent="Body/PlayField/blocks"]
+visible = false
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 8 )
+format = 1
+tile_data = PoolIntArray( 262148, 6, 0, 262149, 7, 0, 262150, 7, 0, 327683, 6, 0, 327684, 7, 0, 327685, 7, 0, 327686, 5, 0, 327687, 5, 0, 393219, 7, 0, 393220, 7, 0, 393221, 5, 0, 393222, 5, 0, 393223, 4, 0, 458754, 7, 0, 458755, 7, 0, 458756, 5, 0, 458757, 5, 0, 458758, 4, 0, 458759, 4, 0, 458760, 3, 0, 524290, 7, 0, 524291, 5, 0, 524292, 5, 0, 524293, 4, 0, 524294, 4, 0, 524295, 3, 0, 524296, 3, 0, 589825, 7, 0, 589826, 5, 0, 589827, 5, 0, 589828, 4, 0, 589829, 4, 0, 589830, 3, 0, 589831, 3, 0, 589832, 2, 0, 589833, 2, 0, 655361, 5, 0, 655362, 5, 0, 655363, 4, 0, 655364, 4, 0, 655365, 3, 0, 655366, 3, 0, 655367, 2, 0, 655368, 2, 0, 655369, 11, 0, 720897, 5, 0, 720898, 4, 0, 720899, 4, 0, 720900, 3, 0, 720901, 3, 0, 720902, 2, 0, 720903, 2, 0, 720904, 11, 0, 720905, 11, 0, 786433, 4, 0, 786434, 4, 0, 786435, 3, 0, 786436, 3, 0, 786437, 2, 0, 786438, 2, 0, 786439, 11, 0, 786440, 11, 0, 786441, 10, 0, 851970, 3, 0, 851971, 3, 0, 851972, 2, 0, 851973, 2, 0, 851974, 11, 0, 851975, 11, 0, 851976, 10, 0, 917506, 3, 0, 917507, 2, 0, 917508, 2, 0, 917509, 11, 0, 917510, 11, 0, 917511, 10, 0, 917512, 10, 0, 983043, 2, 0, 983044, 11, 0, 983045, 11, 0, 983046, 10, 0, 983047, 10, 0, 1048579, 11, 0, 1048580, 11, 0, 1048581, 10, 0, 1048582, 10, 0, 1048583, 6, 0, 1114116, 10, 0, 1114117, 10, 0, 1114118, 6, 0 )
+
+[node name="Ball" parent="Body/PlayField" instance=ExtResource( 5 )]
 
 [node name="OutFieldArea" type="Area2D" parent="Body/PlayField"]
 editor/display_folded = true
@@ -424,10 +372,11 @@ one_shot = true
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Gameover" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 
 [node name="Gamestart" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
+[connection signal="fire" from="Body/PlayField/Player" to="." method="_on_Player_fire"]
 [connection signal="getBonus" from="Body/PlayField/Player" to="." method="_on_Player_getBonus"]
 [connection signal="CollideBall" from="Body/PlayField/Ball" to="." method="_on_Ball_CollideBall"]
 [connection signal="body_entered" from="Body/PlayField/OutFieldArea" to="." method="_on_OutFieldArea_body_entered"]

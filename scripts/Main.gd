@@ -3,6 +3,7 @@ extends Node2D
 var isPreparedBall = true
 var Bonus = preload("res://scenes/Bonus.tscn")
 var Block = preload("res://scenes/Block.tscn")
+var Bullet = preload("res://scenes/Bullet.tscn")
 
 var lives = 3
 var score = 0
@@ -14,7 +15,7 @@ func _ready():
 	
 	ball = $Body/PlayField/Ball
 	
-	var EditorMap = $Body/PlayField/blocks/EditorBlocks
+	var EditorMap = $Body/PlayField/blocks.get_node("map_7")
 	EditorMap.visible = false
 	
 	for point in EditorMap.get_used_cells():
@@ -104,3 +105,13 @@ func _on_Ball_CollideBall():
 
 func _on_StickTimer_timeout():
 	isStick = false
+
+
+func _on_Player_fire(pos1, pos2):
+	var bull1 = Bullet.instance()
+	bull1.position = pos1
+	$Body/PlayField.add_child(bull1)
+	var bull2 = Bullet.instance()
+	bull2.position = pos2
+	$Body/PlayField.add_child(bull2)
+	

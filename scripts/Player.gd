@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal getBonus(name)
+signal fire(pos1, pos2)
 
 var direction = 0
 var speed = 350
@@ -44,22 +45,26 @@ func _physics_process(delta):
 		direction = 0
 	
 	if Input.is_action_just_pressed("ui_accept") && isLaser && bulletsLeft > 0:
-		bulletMotion = Vector2(0, -1)
+		bulletsLeft -= 1
+		var offset = 32
+		if isExpand:
+			offset = 56
+		var pos1 = position - Vector2(-offset, 24)
+		var pos2 = position - Vector2(offset, 24)
+		emit_signal("fire", pos1, pos2)
 	
-
-	$bullets/bulletsBody.move_and_slide(bulletMotion * 500)
 	move_and_slide(Vector2(direction * speed, 0))
 	
 func reset():
 	$Sprite.region_rect = normalWidth
 	$collision.shape.extents = Vector2(48,12)
 	$collision.disabled = false
-	$bullets.visible = false
 	isFreeze = false
 	visible = true
 	isExpand = false
 	isLaser = false
 
+	#setLaser()
 
 func expand() :
 	isExpand = true
@@ -72,7 +77,6 @@ func expand() :
 	
 func setLaser():
 	isLaser = true
-	#$bullets.visible = true
 	bulletsLeft = 3
 	if isExpand:
 		$Sprite.region_rect = extendLaser
@@ -87,9 +91,8 @@ func explode():
 	isFreeze = true
 	
 func stopBullet() :
-	$bullets.position.y = -22
-	bulletMotion = Vector2()
-	$bullets.visible = false
+	pass
+	
 	
 # ловим бонус
 func _on_Area2D_area_entered(area):

@@ -56,7 +56,7 @@ func _process(delta):
 	
 	
 func setup(x, y, rect, index):
-	position.x = 24 + x * 24
+	position.x = 24 + x * 48
 	position.y = 24 + y * 24
 	$Sprite.region_rect = rect
 	blockIndex = index
@@ -65,7 +65,7 @@ func setup(x, y, rect, index):
 	animName = blocks[blockIndex][2]
 	
 func emitRandomBonus():
-	if rand_range(0, 1) < 0.05 :
+	if rand_range(0, 1) < 0.08 :
 		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 5))], position)
 	
 func kick():
@@ -78,3 +78,8 @@ func kick():
 		useAnimation = true
 
 	
+
+
+func _on_Area2D_area_entered(area):
+	area.queue_free()
+	kick()
