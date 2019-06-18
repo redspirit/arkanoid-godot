@@ -3,6 +3,7 @@ extends Node2D
 var isPreparedBall = true
 
 var lives = 3
+var score = 0
 
 func _ready():
 	
@@ -15,9 +16,11 @@ func _ready():
 		var block = Block.instance()
 		var id = EditorMap.get_cell(point.x, point.y)
 		block.setup(point.x, point.y, EditorMap.tile_set.tile_get_region(id), id)
+		block.connect("addScore", self, "_on_addScore")
 		$Body/PlayField/blocks.add_child(block)
 
 	isPreparedBall = true
+	$GUI/scoreCurrent.text = str(score)
 	setLifeBar(lives)
 
 
@@ -53,3 +56,6 @@ func _on_OutFieldArea_body_entered(body):
 	else :
 		print("GAME OVER")
 	
+func _on_addScore(value):
+	score += value
+	$GUI/scoreCurrent.text = str(score)

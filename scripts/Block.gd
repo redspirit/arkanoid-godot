@@ -1,17 +1,73 @@
 extends KinematicBody2D
 
+signal addScore(value)
+
 var isBlock = true
 var blockIndex = 0
+
+var blocks = {		#[lives, score]
+	2: [1, 100, ""],
+	3: [1, 120, ""],
+	4: [1, 140, ""],
+	5: [1, 160, ""],
+	6: [1, 180, ""],
+	7: [1, 200, ""],
+	10: [1, 60, ""],
+	11: [1, 80, ""],
+	8: [3, 500, "white"],		#0,80
+	9: [5, 1000, "gold"]		#0,88
+}
+
+var lives
+var score
+var animName = ""
+
+var useAnimation = false
+var animDuration = 0.04
+var animElapsed = 0
+var animFrame = 0
 
 func _ready():
 	pass
 
+	
+func _process(delta):
+	
+	if useAnimation :
+	
+		animElapsed += delta
+		if animElapsed >= animDuration:
+			animElapsed = 0
+			animFrame += 1
+		
+		if animFrame == 6:
+			animFrame = 0
+			useAnimation = ""
+		
+		var offset = 0
+		if animName == "gold" :
+			offset = 8
+		
+		$Sprite.region_rect = Rect2(animFrame * 16, 80 + offset, 16, 8)
+	
 	
 func setup(x, y, rect, index):
 	position.x = 24 + x * 24
 	position.y = 24 + y * 24
 	$Sprite.region_rect = rect
 	blockIndex = index
+	lives = blocks[blockIndex][0]
+	score = blocks[blockIndex][1]
+	animName = blocks[blockIndex][2]
 	
 func kick():
-	queue_free()
+	
+	lives -= 1
+	
+	if lives == 0 :
+		emit_signal("addScore", score)
+		queue_free()
+	else :
+		useAnimation = true
+
+	
