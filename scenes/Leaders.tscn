@@ -22,3 +22,5 @@ uppercase = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 script = ExtResource( 2 )
+[connection signal="onLeaders" from="HTTPRequest" to="." method="_on_HTTPRequest_onLeaders"]
+[connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="_on_HTTPRequest_request_completed"]

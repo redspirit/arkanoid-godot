@@ -29,10 +29,10 @@ func _ready():
 	httpGet.connect("request_completed", self, "on_http_get_result")
 	httpPost.connect("request_completed", self, "on_http_post_result")
 	
-	print("KUSS")
-	timer = Timer.new()
-	timer.connect("timeout", self, "_on_timer")
-	timer.start(2)
+	#print("KUSS")
+	#timer = Timer.new()
+	#timer.connect("timeout", self, "_on_timer")
+	#timer.start(2)
 	
 func _on_timer():
 	print("TICK")
@@ -54,9 +54,10 @@ func saveData(s, name):
 	file.close()
 	
 func httpGetLeaders():
-	print("make request ", baseUrl + "/leaders")
-	print(httpGet)
-	httpGet.request(baseUrl + "/leaders")
+	#print("make request ", baseUrl + "/leaders")
+	#print(httpGet)
+	#httpGet.request(baseUrl + "/leaders")
+	pass
 
 func httpSaveScore(score, name):
 	pass
