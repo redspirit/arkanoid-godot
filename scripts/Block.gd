@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal addScore(value)
 signal spawnBonus(name, pos)
+signal levelClear
 
 var isBlock = true
 var blockIndex = 0
@@ -75,6 +76,10 @@ func kick(isLaser):
 			emit_signal("addScore", score)
 		emitRandomBonus()
 		queue_free()
+		
+		if get_tree().get_nodes_in_group("brick").size() == 1 :
+			emit_signal("levelClear")
+		
 	else :
 		useAnimation = true
 
@@ -84,10 +89,10 @@ func kick(isLaser):
 func _on_Area2D_area_entered(area):
 
 	area.queue_free()
+		
+#	if lives == 1 :
+#		$hitBlock.play()
+#	else :
+#		$hitUnbreack.play()
+	
 	kick(true)
-	
-	if lives == 1 :
-		$hitBlock.play()
-	else :
-		$hitUnbreack.play()
-	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Leaders.gd" type="Script" id=1]
+[ext_resource path="res://scripts/http.gd" type="Script" id=2]
 
 [node name="Leaders" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,3 +19,6 @@ margin_bottom = 72.0
 custom_colors/font_color = Color( 0.913725, 0.0470588, 0.0470588, 1 )
 text = "leaders by high scores"
 uppercase = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource( 2 )

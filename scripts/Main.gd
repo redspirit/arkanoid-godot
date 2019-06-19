@@ -9,15 +9,18 @@ var lives = 3
 var score = 0
 var isStick = false
 var isGameOver = false
+var isWaiting = false
 
 var levelsCount = 19
-var currentLevel = 3
+var currentLevel = 1
 
 var ball
+var player
 
 func _ready():
 	
 	ball = $Body/PlayField/Ball
+	player = $Body/PlayField/Player
 	
 	loadLevel(currentLevel)
 	
@@ -33,22 +36,29 @@ func _ready():
 func loadLevel(num):
 	var EditorMap = $Body/PlayField/blocks.get_node("map_" + str(num))
 	$GUI/roundValue.text = str(num)
-	EditorMap.visible = false
+
+	for node in $Body/PlayField/blocks.get_children():
+		if node.get("isBlock"):
+			node.queue_free()
+	
 	for point in EditorMap.get_used_cells():
 		var block = Block.instance()
 		var id = EditorMap.get_cell(point.x, point.y)
 		block.setup(point.x, point.y, EditorMap.tile_set.tile_get_region(id), id)
 		block.connect("addScore", self, "_on_addScore")
 		block.connect("spawnBonus", self, "_on_spawnBonus")
+		block.connect("levelClear", self, "_on_LevelClear")
 		$Body/PlayField/blocks.add_child(block)
+		
+	changeBackground()
 
 func _physics_process(delta):
 	
 	if isPreparedBall:
-		var pos = $Body/PlayField/Player.position
+		var pos = player.position
 		ball.grab(Vector2(pos.x, pos.y - 24))
 	
-	if Input.is_action_just_pressed("ui_accept") && !isGameOver:
+	if Input.is_action_just_pressed("ui_accept") && !isGameOver && !isWaiting:
 		
 		if isPreparedBall:
 			ball.release()
@@ -66,21 +76,6 @@ func setLifeBar(num) :
 		sprite.position.y = floor(i / 3) * 8
 		$GUI/LifeBar.add_child(sprite)
 
-
-# шар улетает вниз
-func _on_OutFieldArea_body_entered(body):
-	lives -= 1
-	setLifeBar(lives)
-	
-	$LifeTimer.start(3)
-	$Body/PlayField/Player.explode()
-	ball.visible = false
-	
-	if lives > 0:
-		isPreparedBall = true
-	else :
-		gameOver()
-
 func gameOver():
 	isGameOver = true
 	$Body/GameoverLabel.visible = true
@@ -90,6 +85,42 @@ func gameOver():
 	if Scores.isRecord(score):
 		Scores.saveData(score, "")
 		print("Надо спросить имя игрока")
+
+func nextLevel():
+	currentLevel += 1
+	if currentLevel > levelsCount:
+		currentLevel = levelsCount
+		print("END")
+		return
+		
+	player.position.x = 270
+	isPreparedBall = true
+	isWaiting = false
+	$Sounds/Gamestart.play()
+	loadLevel(currentLevel)
+
+
+func changeBackground():
+	var backMap = $Body/BackTiles
+	var backId = currentLevel % 5
+	for point in backMap.get_used_cells():
+		backMap.set_cell(point.x, point.y, backId)
+
+
+# шар улетает вниз
+func _on_OutFieldArea_body_entered(body):
+	lives -= 1
+	setLifeBar(lives)
+	
+	$LifeTimer.start(3)
+	player.explode()
+	ball.visible = false
+	
+	if lives > 0:
+		isPreparedBall = true
+		isWaiting = true
+	else :
+		gameOver()
 	
 func _on_addScore(value):
 	score += value
@@ -114,9 +145,10 @@ func _on_Player_getBonus(name):
 func _on_LifeTimer_timeout():
 	if lives == 0 :
 		return
-	$Body/PlayField/Player.reset()
+	player.reset()
 	$Sounds/Gamestart.play()
 	ball.visible = true
+	isWaiting = false
 
 # шар удаляется об палку
 func _on_Ball_CollideBall():
@@ -136,6 +168,21 @@ func _on_Player_fire(pos1, pos2):
 	$Body/PlayField.add_child(bull2)
 	
 
-
 func _on_GameoverTimer_timeout():
 	get_tree().change_scene("res://scenes/Menu.tscn")
+
+func _on_Button_pressed():
+	nextLevel()
+
+func _on_LevelClear():
+	isWaiting = true
+	isPreparedBall = true
+	$NextlevelTimer.start()
+
+
+func _on_SafeArea_Ball_entered(body):
+	isPreparedBall = true
+
+
+func _on_NextlevelTimer_timeout():
+	nextLevel()

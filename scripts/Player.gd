@@ -51,6 +51,8 @@ func _physics_process(delta):
 		var pos1 = position - Vector2(-offset, 24)
 		var pos2 = position - Vector2(offset, 24)
 		emit_signal("fire", pos1, pos2)
+		if bulletsLeft == 0:
+			removeLaser()
 	
 	move_and_slide(Vector2(direction * speed, 0))
 	
