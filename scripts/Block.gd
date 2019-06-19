@@ -79,7 +79,7 @@ func kick():
 
 	
 
-
+# лазер попадает
 func _on_Area2D_area_entered(area):
 	area.queue_free()
 	kick()

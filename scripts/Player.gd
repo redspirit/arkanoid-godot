@@ -4,7 +4,7 @@ signal getBonus(name)
 signal fire(pos1, pos2)
 
 var direction = 0
-var speed = 350
+var speed = 380
 var playerSize = Vector2()
 var leftBorder = 0
 var rightBorder = 0
@@ -27,7 +27,6 @@ var explodeRects = [
 	Rect2(40,32,48,24),
 	Rect2(88,32,48,25)
 ]
-
 
 func _ready():
 	reset()

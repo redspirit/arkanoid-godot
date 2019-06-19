@@ -9,15 +9,26 @@ var lives = 3
 var score = 0
 var isStick = false
 
+var levelsCount = 19
+var currentLevel = 1
+
 var ball
 
 func _ready():
 	
 	ball = $Body/PlayField/Ball
 	
-	var EditorMap = $Body/PlayField/blocks.get_node("map_7")
-	EditorMap.visible = false
+	loadLevel(currentLevel)
 	
+	isPreparedBall = true
+	$GUI/scoreCurrent.text = str(score)
+	setLifeBar(lives)
+	$Sounds/Gamestart.play()
+
+
+func loadLevel(num):
+	var EditorMap = $Body/PlayField/blocks.get_node("map_" + str(num))
+	EditorMap.visible = false
 	for point in EditorMap.get_used_cells():
 		var block = Block.instance()
 		var id = EditorMap.get_cell(point.x, point.y)
@@ -25,12 +36,6 @@ func _ready():
 		block.connect("addScore", self, "_on_addScore")
 		block.connect("spawnBonus", self, "_on_spawnBonus")
 		$Body/PlayField/blocks.add_child(block)
-
-	isPreparedBall = true
-	$GUI/scoreCurrent.text = str(score)
-	setLifeBar(lives)
-	$Sounds/Gamestart.play()
-
 
 func _physics_process(delta):
 	
