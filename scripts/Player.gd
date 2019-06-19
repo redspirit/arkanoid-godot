@@ -13,7 +13,7 @@ var explodeFrame = 0
 var isFreeze = false
 var isExpand = false
 var isLaser = false
-var bulletsLeft = 3
+var bulletsLeft = 5
 
 var normalWidth = Rect2(0,0,32,8)
 var extendWidth = Rect2(0,8,48,8)
@@ -72,16 +72,23 @@ func expand() :
 		$Sprite.region_rect = extendLaser
 	else :
 		$Sprite.region_rect = extendWidth
-	
+		
+	$ExtendSound.play()
 	
 func setLaser():
 	isLaser = true
-	bulletsLeft = 3
+	bulletsLeft = 5
 	if isExpand:
 		$Sprite.region_rect = extendLaser
 	else :
 		$Sprite.region_rect = normalLaser
 
+func removeLaser():
+	isLaser = false
+	if isExpand:
+		$Sprite.region_rect = extendWidth
+	else :
+		$Sprite.region_rect = normalWidth
 	
 # уничтожаем палку
 func explode():

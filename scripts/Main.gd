@@ -8,9 +8,10 @@ var Bullet = preload("res://scenes/Bullet.tscn")
 var lives = 3
 var score = 0
 var isStick = false
+var isGameOver = false
 
 var levelsCount = 19
-var currentLevel = 1
+var currentLevel = 3
 
 var ball
 
@@ -24,10 +25,14 @@ func _ready():
 	$GUI/scoreCurrent.text = str(score)
 	setLifeBar(lives)
 	$Sounds/Gamestart.play()
-
+	
+	var data = Scores.getData()
+	$GUI/highscoreValue.text = str(data.score)
+	
 
 func loadLevel(num):
 	var EditorMap = $Body/PlayField/blocks.get_node("map_" + str(num))
+	$GUI/roundValue.text = str(num)
 	EditorMap.visible = false
 	for point in EditorMap.get_used_cells():
 		var block = Block.instance()
@@ -43,9 +48,11 @@ func _physics_process(delta):
 		var pos = $Body/PlayField/Player.position
 		ball.grab(Vector2(pos.x, pos.y - 24))
 	
-	if Input.is_action_just_pressed("ui_accept") && isPreparedBall:
-		ball.release()
-		isPreparedBall = false
+	if Input.is_action_just_pressed("ui_accept") && !isGameOver:
+		
+		if isPreparedBall:
+			ball.release()
+			isPreparedBall = false
 	
 	
 func setLifeBar(num) :
@@ -72,9 +79,17 @@ func _on_OutFieldArea_body_entered(body):
 	if lives > 0:
 		isPreparedBall = true
 	else :
-		# GAME OVER
-		$Body/GameoverLabel.visible = true
-		$Sounds/Gameover.play()
+		gameOver()
+
+func gameOver():
+	isGameOver = true
+	$Body/GameoverLabel.visible = true
+	$Sounds/Gameover.play()
+	$GameoverTimer.start()
+	
+	if Scores.isRecord(score):
+		Scores.saveData(score, "")
+		print("Надо спросить имя игрока")
 	
 func _on_addScore(value):
 	score += value
@@ -120,3 +135,7 @@ func _on_Player_fire(pos1, pos2):
 	bull2.position = pos2
 	$Body/PlayField.add_child(bull2)
 	
+
+
+func _on_GameoverTimer_timeout():
+	get_tree().change_scene("res://scenes/Menu.tscn")

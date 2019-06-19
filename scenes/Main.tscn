@@ -193,7 +193,6 @@ margin_bottom = 723.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="GUI" type="Node2D" parent="."]
-editor/display_folded = true
 position = Vector2( 601, 0 )
 __meta__ = {
 "_edit_lock_": true
@@ -262,6 +261,7 @@ format = 1
 tile_data = PoolIntArray( 0, 5, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 3, 0, 8, 2, 0, 9, 6, 0, 10, 6, 0, 11, 6, 0, 12, 6, 0, 13, 6, 0, 14, 6, 0, 15, 6, 0, 16, 3, 0, 19, 2, 0, 20, 6, 0, 21, 6, 0, 22, 6, 0, 23, 7, 0, 65536, 4, 0, 65559, 4, 0, 131072, 4, 0, 131095, 4, 0, 196608, 0, 0, 196631, 0, 0, 393216, 1, 0, 393239, 1, 0, 458752, 4, 0, 458775, 4, 0, 524288, 4, 0, 524311, 4, 0, 589824, 4, 0, 589847, 4, 0, 655360, 0, 0, 655383, 0, 0, 851968, 1, 0, 851991, 1, 0, 917504, 4, 0, 917527, 4, 0, 983040, 4, 0, 983063, 4, 0, 1048576, 4, 0, 1048599, 4, 0, 1114112, 0, 0, 1114135, 0, 0, 1310720, 1, 0, 1310743, 1, 0, 1376256, 4, 0, 1376279, 4, 0, 1441792, 4, 0, 1441815, 4, 0, 1507328, 4, 0, 1507351, 4, 0, 1572864, 0, 0, 1572887, 0, 0, 1769472, 1, 0, 1769495, 4, 0, 1835008, 4, 0, 1835031, 4, 0 )
 
 [node name="PlayField" type="Node2D" parent="Body"]
+editor/display_folded = true
 position = Vector2( 24, 24 )
 
 [node name="Walls" type="KinematicBody2D" parent="Body/PlayField"]
@@ -285,7 +285,6 @@ shape = SubResource( 5 )
 position = Vector2( 270, 592 )
 
 [node name="blocks" type="Node2D" parent="Body/PlayField"]
-editor/display_folded = true
 
 [node name="map_1" type="TileMap" parent="Body/PlayField/blocks"]
 visible = false
@@ -467,7 +466,12 @@ one_shot = true
 wait_time = 30.0
 one_shot = true
 
+[node name="GameoverTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Gameover" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 6 )
@@ -480,3 +484,4 @@ stream = ExtResource( 7 )
 [connection signal="body_entered" from="Body/PlayField/OutFieldArea" to="." method="_on_OutFieldArea_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="timeout" from="StickTimer" to="." method="_on_StickTimer_timeout"]
+[connection signal="timeout" from="GameoverTimer" to="." method="_on_GameoverTimer_timeout"]

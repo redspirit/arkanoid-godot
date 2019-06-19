@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menu-navigate.wav-c79773b8d75f4f57af74f32f5ec1e156.sample"
+
+[deps]
+
+source_file="res://sounds/menu-navigate.wav"
+dest_files=[ "res://.import/menu-navigate.wav-c79773b8d75f4f57af74f32f5ec1e156.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

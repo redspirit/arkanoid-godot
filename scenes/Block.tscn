@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Block.gd" type="Script" id=1]
 [ext_resource path="res://sprites/blocks.png" type="Texture" id=2]
+[ext_resource path="res://sounds/hit_cube.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/hit_unbreakable.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 12 )
@@ -23,10 +25,19 @@ region_rect = Rect2( 0, 64, 16, 8 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
 monitorable = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="coll" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
+
+[node name="hitBlock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="hitUnbreack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

@@ -68,10 +68,11 @@ func emitRandomBonus():
 	if rand_range(0, 1) < 0.08 :
 		emit_signal("spawnBonus", bonuses[floor(rand_range(0, 5))], position)
 	
-func kick():
+func kick(isLaser):
 	lives -= 1
 	if lives == 0 :
-		emit_signal("addScore", score)
+		if !isLaser:
+			emit_signal("addScore", score)
 		emitRandomBonus()
 		queue_free()
 	else :
@@ -81,5 +82,12 @@ func kick():
 
 # лазер попадает
 func _on_Area2D_area_entered(area):
+
 	area.queue_free()
-	kick()
+	kick(true)
+	
+	if lives == 1 :
+		$hitBlock.play()
+	else :
+		$hitUnbreack.play()
+	

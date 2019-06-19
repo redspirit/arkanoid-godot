@@ -39,7 +39,7 @@ func _integrate_forces(state):
 
 func _on_Ball_body_exited(body):
 	if body.get("isBlock") :
-		body.kick()
+		body.kick(false)
 
 func setSpeed():
 	var norm = linear_velocity.normalized()

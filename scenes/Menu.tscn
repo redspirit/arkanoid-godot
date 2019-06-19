@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://sprites/logo.png" type="Texture" id=2]
 [ext_resource path="res://sprites/life.png" type="Texture" id=3]
+[ext_resource path="res://music/Name_Entry.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sounds/menu-navigate.wav" type="AudioStream" id=5]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource( 1 )
@@ -95,3 +97,11 @@ position = Vector2( 288, 360 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 centered = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -3.0
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -25.0
