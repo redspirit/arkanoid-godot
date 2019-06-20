@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scripts/Leaders.gd" type="Script" id=1]
-[ext_resource path="res://scripts/http.gd" type="Script" id=2]
 
 [node name="Leaders" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,11 +15,42 @@ margin_left = 120.0
 margin_top = 48.0
 margin_right = 648.0
 margin_bottom = 72.0
-custom_colors/font_color = Color( 0.913725, 0.0470588, 0.0470588, 1 )
+custom_colors/font_color = Color( 0.709804, 0.192157, 0.129412, 1 )
 text = "leaders by high scores"
 uppercase = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-script = ExtResource( 2 )
-[connection signal="onLeaders" from="HTTPRequest" to="." method="_on_HTTPRequest_onLeaders"]
-[connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="_on_HTTPRequest_request_completed"]
+
+[node name="ListNode" type="Node2D" parent="."]
+position = Vector2( 96, 144 )
+
+[node name="ItemNode" type="Node2D" parent="ListNode"]
+editor/display_folded = true
+
+[node name="num" type="Label" parent="ListNode/ItemNode"]
+margin_right = 72.0
+margin_bottom = 24.0
+text = "1:"
+align = 2
+
+[node name="name" type="Label" parent="ListNode/ItemNode"]
+margin_left = 96.0
+margin_right = 240.0
+margin_bottom = 24.0
+text = "BOB"
+
+[node name="score" type="Label" parent="ListNode/ItemNode"]
+margin_left = 288.0
+margin_right = 552.0
+margin_bottom = 24.0
+text = "498509"
+align = 2
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 144.0
+margin_top = 648.0
+margin_right = 624.0
+margin_bottom = 672.0
+text = "press fire to return"
+uppercase = true
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
