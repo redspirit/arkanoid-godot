@@ -12,6 +12,16 @@ func _ready():
 	score = data.score
 	$ScoresValue.text = str(data.score)
 	$NotifLabel.visible = false
+	
+	data.name = "HEELO"
+	
+	var i = 0
+	for ch in data.name:
+		i += 1
+		var num = set.find(ch)
+		result[i - 1] = num
+		$NameNode.get_node("lab_" + str(i)).text = set[num]
+
 
 func _process(delta):
 	
@@ -61,6 +71,7 @@ func saveName():
 		doReturn = false
 		return
 	
+	Scores.saveData(score, name)
 	makeRequest(name)
 
 func makeRequest(name):
@@ -79,7 +90,9 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		$NotifLabel.text = "saved"
 		$NotifLabel.visible = true
 		doReturn = true
+		$Timer.start()
 	else :
 		$NotifLabel.text = "server error"
 		$NotifLabel.visible = true
 		doReturn = true
+		$Timer.start()

@@ -3,6 +3,7 @@ extends Node2D
 var cursorIndex = 0
 
 func _ready():
+	#return Scores.saveData(100, "A")
 	var data = Scores.getData()
 	$highscoreValue.text = str(data.score)
 	$Music.play()

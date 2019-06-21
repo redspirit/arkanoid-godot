@@ -81,11 +81,7 @@ func gameOver():
 	$Body/GameoverLabel.visible = true
 	$Sounds/Gameover.play()
 	$GameoverTimer.start()
-	
-	if Scores.isRecord(score):
-		Scores.saveData(score, "")
-		print("Надо спросить имя игрока")
-
+			
 func nextLevel():
 	currentLevel += 1
 	if currentLevel > levelsCount:
@@ -169,7 +165,12 @@ func _on_Player_fire(pos1, pos2):
 	
 
 func _on_GameoverTimer_timeout():
-	get_tree().change_scene("res://scenes/Menu.tscn")
+	if Scores.isRecord(score):
+		Scores.saveData(score, "")
+		get_tree().change_scene("res://scenes/SaveResult.tscn")
+	else :
+		get_tree().change_scene("res://scenes/Menu.tscn")	
+	
 
 func _on_Button_pressed():
 	nextLevel()
