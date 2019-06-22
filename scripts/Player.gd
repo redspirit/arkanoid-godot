@@ -50,6 +50,7 @@ func _physics_process(delta):
 			offset = 56
 		var pos1 = position - Vector2(-offset, 24)
 		var pos2 = position - Vector2(offset, 24)
+		$Laser.play()
 		emit_signal("fire", pos1, pos2)
 		if bulletsLeft == 0:
 			removeLaser()

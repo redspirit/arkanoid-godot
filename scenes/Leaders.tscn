@@ -46,6 +46,13 @@ margin_bottom = 24.0
 text = "498509"
 align = 2
 
+[node name="separator" type="Label" parent="ListNode/ItemNode"]
+visible = false
+margin_left = 240.0
+margin_right = 384.0
+margin_bottom = 24.0
+text = "* * * "
+
 [node name="Label2" type="Label" parent="."]
 margin_left = 144.0
 margin_top = 648.0

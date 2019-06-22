@@ -166,7 +166,7 @@ func _on_Player_fire(pos1, pos2):
 
 func _on_GameoverTimer_timeout():
 	if Scores.isRecord(score):
-		Scores.saveData(score, "")
+		Scores.saveData.score = score
 		get_tree().change_scene("res://scenes/SaveResult.tscn")
 	else :
 		get_tree().change_scene("res://scenes/Menu.tscn")	

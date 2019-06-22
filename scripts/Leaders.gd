@@ -2,8 +2,9 @@ extends Node2D
 
 
 func _ready():
+	var data = Scores.getData()
 	$ListNode/ItemNode.visible = false
-	$HTTPRequest.request("http://redspirit.ru:5500/api/leaders")
+	$HTTPRequest.request("http://redspirit.ru:5500/api/leaders?name=" + data.name)
 	
 
 func _process(delta):
@@ -18,9 +19,15 @@ func makeList(items):
 		var node = $ListNode/ItemNode.duplicate(0)
 		node.visible = true
 		node.position.y = (i - 1) * 48 
-		node.get_node("num").text = str(i)
-		node.get_node("name").text = item.name
-		node.get_node("score").text = str(item.score)
+		if item.has("separator") :
+			node.get_node("separator").visible = true
+			node.get_node("num").visible = false
+			node.get_node("name").visible = false
+			node.get_node("score").visible = false
+		else :
+			node.get_node("num").text = str(item.num)
+			node.get_node("name").text = item.name
+			node.get_node("score").text = str(item.score)
 		$ListNode.add_child(node)
 		
 		

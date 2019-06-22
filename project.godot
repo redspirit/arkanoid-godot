@@ -18,7 +18,6 @@ _global_script_class_icons={
 config/name="Arkanoid Godot"
 run/main_scene="res://scenes/Menu.tscn"
 boot_splash/image="res://sprites/black.png"
-config/icon="res://icon.png"
 
 [autoload]
 

@@ -13,8 +13,6 @@ func _ready():
 	$ScoresValue.text = str(data.score)
 	$NotifLabel.visible = false
 	
-	data.name = "HEELO"
-	
 	var i = 0
 	for ch in data.name:
 		i += 1
@@ -70,7 +68,7 @@ func saveName():
 		$Timer.start()
 		doReturn = false
 		return
-	
+		
 	Scores.saveData(score, name)
 	makeRequest(name)
 
