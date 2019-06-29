@@ -27,8 +27,9 @@ Scores="*res://scripts/Scores.gd"
 [display]
 
 window/size/width=768
-window/size/height=720
-window/size/resizable=false
+window/size/height=1300
+window/size/borderless=true
+window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 
 [gui]

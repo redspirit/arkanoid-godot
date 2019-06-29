@@ -39,3 +39,7 @@ func selecItem():
 		get_tree().quit()
 		
 		
+
+func _on_startLabel_gui_input(event):
+	print(event)
+	$Select.play()
