@@ -7,10 +7,6 @@ func _ready():
 	$HTTPRequest.request("http://redspirit.ru:5500/api/leaders?name=" + data.name)
 	
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept") :
-		get_tree().change_scene("res://scenes/Menu.tscn")
-
 
 func makeList(items):
 	var i = 0
@@ -39,3 +35,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 
 	var json = JSON.parse(body.get_string_from_utf8())
 	makeList(json.result)
+
+
+func _on_TouchBack_pressed():
+	get_tree().change_scene("res://scenes/Menu.tscn")

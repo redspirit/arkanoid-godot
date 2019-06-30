@@ -57,13 +57,16 @@ func _physics_process(delta):
 	if isPreparedBall:
 		var pos = player.position
 		ball.grab(Vector2(pos.x, pos.y - 24))
+		
+func _on_TouchUp_pressed():
 	
-	if Input.is_action_just_pressed("ui_accept") && !isGameOver && !isWaiting:
+	if !isGameOver && !isWaiting:
 		
 		if isPreparedBall:
 			ball.release()
 			isPreparedBall = false
 	
+	player.fire()
 	
 func setLifeBar(num) :
 	for child in $GUI/LifeBar.get_children():
@@ -187,3 +190,20 @@ func _on_SafeArea_Ball_entered(body):
 
 func _on_NextlevelTimer_timeout():
 	nextLevel()
+
+
+func _on_TouchLeft_pressed():
+	player.toLeft(true)
+
+func _on_TouchLeft_released():
+	player.toLeft(false)
+
+func _on_TouchRight_pressed():
+	player.toRight(true)
+
+func _on_TouchRight_released():
+	player.toRight(false)
+
+
+func _on_TouchBack_pressed():
+	get_tree().change_scene("res://scenes/Menu.tscn")

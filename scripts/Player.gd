@@ -31,19 +31,24 @@ var explodeRects = [
 func _ready():
 	reset()
 
-func _physics_process(delta):
+func toLeft(state):
+	if state:
+		direction -= 1
+	else :
+		direction += 1
+
+func toRight(state):
+	if state:
+		direction += 1
+	else :
+		direction -= 1
+
+func fire():
 	
 	if isFreeze:
 		return
 	
-	if Input.is_action_pressed("ui_left"):
-		direction = -1
-	elif Input.is_action_pressed("ui_right"):
-		direction = 1
-	else :
-		direction = 0
-	
-	if Input.is_action_just_pressed("ui_accept") && isLaser && bulletsLeft > 0:
+	if isLaser && bulletsLeft > 0:
 		bulletsLeft -= 1
 		var offset = 32
 		if isExpand:
@@ -54,6 +59,12 @@ func _physics_process(delta):
 		emit_signal("fire", pos1, pos2)
 		if bulletsLeft == 0:
 			removeLaser()
+
+
+func _physics_process(delta):
+	
+	if isFreeze:
+		return
 	
 	move_and_slide(Vector2(direction * speed, 0))
 	

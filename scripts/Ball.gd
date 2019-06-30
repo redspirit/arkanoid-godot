@@ -3,7 +3,7 @@ extends RigidBody2D
 signal CollideBall
 
 var isHolding = true
-var gpos
+var gpos = global_position
 
 var speed = 0
 var normalSpeed = 350

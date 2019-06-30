@@ -48,8 +48,7 @@ text = "0"
 align = 1
 
 [node name="Labels" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 12, 1104 )
+position = Vector2( 12, 1082 )
 
 [node name="Label" type="Label" parent="Labels"]
 margin_left = 108.041
@@ -77,7 +76,7 @@ uppercase = true
 
 [node name="Menu" type="Node2D" parent="."]
 editor/display_folded = true
-position = Vector2( 264, 672 )
+position = Vector2( 264, 673 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="startLabel" type="Label" parent="Menu"]

@@ -27,10 +27,10 @@ Scores="*res://scripts/Scores.gd"
 [display]
 
 window/size/width=768
-window/size/height=1300
-window/size/borderless=true
+window/size/height=1250
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [gui]
 
@@ -89,6 +89,10 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=1
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

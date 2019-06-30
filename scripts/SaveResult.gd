@@ -23,32 +23,12 @@ func _ready():
 
 func _process(delta):
 	
-	if Input.is_action_just_pressed("ui_right"):
-		cursorIndex += 1
-		if cursorIndex > 5:
-			cursorIndex = 0
-
-	if Input.is_action_just_pressed("ui_left"):
-		cursorIndex -= 1
-		if cursorIndex < 0:
-			cursorIndex = 5
-
-	if Input.is_action_just_pressed("ui_up"):
-		result[cursorIndex] += 1
-		if result[cursorIndex] > 26:
-			result[cursorIndex] = 0
-		drawLatter()
-		
-	if Input.is_action_just_pressed("ui_down"):
-		result[cursorIndex] -= 1
-		if result[cursorIndex] < 0:
-			result[cursorIndex] = 26
-		drawLatter()
-		
-	if Input.is_action_just_pressed("ui_accept") :
-		saveName()
-		
-	$NameNode/ArrowNode/ArrowLabel.rect_position.x = cursorIndex * 48
+	$NameNode/ArrowNode/Arrow.position.x = cursorIndex * 48
+	
+	
+func select(num):
+	cursorIndex = num -1
+	
 	
 func drawLatter():
 	var elem = $NameNode.get_node("lab_" + str(cursorIndex + 1))
@@ -94,3 +74,46 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		$NotifLabel.visible = true
 		doReturn = true
 		$Timer.start()
+
+func _on_TouchUp_pressed():
+
+	result[cursorIndex] += 1
+	if result[cursorIndex] > 26:
+		result[cursorIndex] = 0
+	drawLatter()
+
+
+func _on_TouchDown_pressed():
+
+	result[cursorIndex] -= 1
+	if result[cursorIndex] < 0:
+		result[cursorIndex] = 26
+	drawLatter()
+
+
+func _on_Touch1_pressed():
+	select(1)
+
+
+func _on_Touch2_pressed():
+	select(2)
+
+
+func _on_Touch3_pressed():
+	select(3)
+
+
+func _on_Touch4_pressed():
+	select(4)
+
+
+func _on_Touch5_pressed():
+	select(5)
+
+
+func _on_Touch6_pressed():
+	select(6)
+
+
+func _on_TouchOK_pressed():
+	saveName()
